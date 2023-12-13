@@ -5,6 +5,10 @@ import command.output.CommandOutput;
 public class ChangePageCommand extends Command {
     private String nextPage;
 
+    public String getNextPage() {
+        return nextPage;
+    }
+
     @Override
     public CommandOutput execute() {
         return null;

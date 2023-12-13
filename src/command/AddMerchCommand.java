@@ -7,6 +7,18 @@ public class AddMerchCommand extends Command {
     private String description;
     private Integer price;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
     @Override
     public CommandOutput execute() {
         return null;

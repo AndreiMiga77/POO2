@@ -7,6 +7,18 @@ public class AddUserCommand extends Command {
     private Integer age;
     private String city;
 
+    public String getType() {
+        return type;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public CommandOutput execute() {
         return null;
