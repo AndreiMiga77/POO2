@@ -14,7 +14,9 @@ public final class ForwardCommand extends Command {
         User user = library.findUser(getUsername());
         Player player = user.getPlayer();
         String message = null;
-        if (!player.isLoaded()) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (!player.isLoaded()) {
             message = "Please load a source before attempting to forward.";
         } else if (!player.getCurrent().isSeekable()) {
             message = "The loaded source is not a podcast.";

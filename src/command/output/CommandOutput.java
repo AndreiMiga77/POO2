@@ -30,6 +30,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
         @Type(value = ShowPreferredSongsCommandOutput.class, name = "showPreferredSongs"),
         @Type(value = GetTop5SongsCommandOutput.class, name = "getTop5Songs"),
         @Type(value = GetTop5PlaylistsCommandOutput.class, name = "getTop5Playlists"),
+        @Type(value = SwitchConnectionStatusCommandOutput.class, name = "switchConnectionStatus"),
+        @Type(value = GetOnlineUsersCommandOutput.class, name = "getOnlineUsers"),
 })
 public abstract class CommandOutput {
 }

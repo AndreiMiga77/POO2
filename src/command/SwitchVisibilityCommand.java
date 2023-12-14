@@ -21,7 +21,9 @@ public final class SwitchVisibilityCommand extends Command {
         User user = library.findUser(getUsername());
         List<Playlist> playlists = user.getPlaylists();
         String message;
-        if (playlistId > playlists.size()) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (playlistId > playlists.size()) {
             message = "The specified playlist ID is too high.";
         } else {
             Playlist playlist = playlists.get(playlistId - 1);

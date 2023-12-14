@@ -25,7 +25,9 @@ public final class SelectCommand extends Command {
         User user = library.findUser(getUsername());
         List<Playable> lastSearch = user.getLastSearch();
         String message;
-        if (lastSearch == null) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (lastSearch == null) {
             message = "Please conduct a search before making a selection.";
         } else if (getItemNumber() > lastSearch.size()) {
             message = "The selected ID is too high.";

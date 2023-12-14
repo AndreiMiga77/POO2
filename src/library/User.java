@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public final class User {
+    public enum UserType {
+        USER,
+        ARTIST,
+        HOST,
+    }
     private String username;
     private int age;
     private String city;
@@ -20,6 +25,21 @@ public final class User {
     private ArrayList<Song> likedSongs;
     private ArrayList<Playlist> ownedPlaylists;
     private ArrayList<Playlist> followedPlaylists;
+    UserType type;
+    boolean offline;
+
+    public User(final String username, final int age, final String city, final UserType type) {
+        this.username = username;
+        this.age = age;
+        this.city = city;
+        this.type = type;
+        selectedSource = -1;
+        player = new Player();
+        likedSongs = new ArrayList<>();
+        ownedPlaylists = new ArrayList<>();
+        followedPlaylists = new ArrayList<>();
+        offline = false;
+    }
 
     public User(final UserInput input) {
         username = input.getUsername();
@@ -30,6 +50,8 @@ public final class User {
         likedSongs = new ArrayList<>();
         ownedPlaylists = new ArrayList<>();
         followedPlaylists = new ArrayList<>();
+        type = UserType.USER;
+        offline = false;
     }
 
     public String getUsername() {
@@ -54,6 +76,14 @@ public final class User {
 
     public void setCity(final String city) {
         this.city = city;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
     }
 
     /**
@@ -116,6 +146,15 @@ public final class User {
      */
     public List<Playlist> getPlaylists() {
         return Collections.unmodifiableList(ownedPlaylists);
+    }
+
+    /**
+     * Advance the time for the user's player
+     * @param dif number of seconds to advance time
+     */
+    public void tickTime(final int dif) {
+        if (!offline)
+            player.tickTime(dif);
     }
 
     /**
@@ -182,5 +221,13 @@ public final class User {
         if (followedPlaylists.remove(playlist)) {
             playlist.removeFollower();
         }
+    }
+
+    public boolean isOffline() {
+        return offline;
+    }
+
+    public void setOffline(boolean offline) {
+        this.offline = offline;
     }
 }

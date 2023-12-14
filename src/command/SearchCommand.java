@@ -39,6 +39,11 @@ public final class SearchCommand extends Command {
         ArrayList<String> names = new ArrayList<>(NUM_MATCHES);
         String message = null;
 
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+            return new SearchCommandOutput(getUsername(), getTimestamp(), message, new ArrayList<>());
+        }
+
         user.getPlayer().unload();
         user.setSelectedSource(-1);
 

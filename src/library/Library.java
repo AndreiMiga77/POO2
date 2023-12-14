@@ -71,13 +71,21 @@ public final class Library {
     }
 
     /**
-     * Advance the time for each user's audio player
+     * Advance the time for each user
      * @param dif number of seconds to advance time
      */
     public void tickTime(final int dif) {
         for (User u : users) {
-            u.getPlayer().tickTime(dif);
+            u.tickTime(dif);
         }
+    }
+
+    /**
+     * Add a user
+     * @param user user object
+     */
+    public void addUser(final User user) {
+        users.add(user);
     }
 
     /**

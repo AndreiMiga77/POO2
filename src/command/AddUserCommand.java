@@ -1,8 +1,10 @@
 package command;
 
+import command.output.AddUserCommandOutput;
 import command.output.CommandOutput;
+import library.*;
 
-public class AddUserCommand extends Command {
+public final class AddUserCommand extends Command {
     private String type;
     private Integer age;
     private String city;
@@ -21,6 +23,23 @@ public class AddUserCommand extends Command {
 
     @Override
     public CommandOutput execute() {
-        return null;
+        Library library = Library.getInstance();
+        User.UserType utype = User.UserType.USER;
+        String message = null;
+        switch (type) {
+            case "artist":
+                utype = User.UserType.ARTIST;
+                break;
+            case "host":
+                utype = User.UserType.HOST;
+                break;
+        }
+        if (library.findUser(getUsername()) == null) {
+            library.addUser(new User(getUsername(), age, city, utype));
+            message = "The username " + getUsername() + " has been added successfully.";
+        } else {
+            message = "The username " + getUsername() + " is already taken.";
+        }
+        return new AddUserCommandOutput(getUsername(), getTimestamp(), message);
     }
 }

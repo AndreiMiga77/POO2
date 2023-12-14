@@ -25,7 +25,9 @@ public final class AddRemoveInPlaylistCommand extends Command {
         Player player = user.getPlayer();
         Playlist playlist = user.getPlaylist(id);
         String message;
-        if (playlist == null) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (playlist == null) {
             message = "The specified playlist does not exist.";
         } else if (!player.isLoaded()) {
             message = "Please load a source before adding to or removing from the playlist.";

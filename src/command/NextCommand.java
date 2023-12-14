@@ -13,7 +13,9 @@ public final class NextCommand extends Command {
         User user = library.findUser(getUsername());
         Player player = user.getPlayer();
         String message = null;
-        if (!player.isLoaded()) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (!player.isLoaded()) {
             message = "Please load a source before skipping to the next track.";
         } else {
             player.skip();

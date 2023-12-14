@@ -15,7 +15,9 @@ public final class LoadCommand extends Command {
         User user = library.findUser(getUsername());
         List<Playable> lastSearch = user.getLastSearch();
         String message;
-        if (lastSearch == null || user.getSelectedSource() < 0) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (lastSearch == null || user.getSelectedSource() < 0) {
             message = "Please select a source before attempting to load.";
         } else {
             user.getPlayer().load(lastSearch.get(user.getSelectedSource()));

@@ -13,7 +13,9 @@ public final class RepeatCommand extends Command {
         User user = library.findUser(getUsername());
         Player player = user.getPlayer();
         String message;
-        if (!player.isLoaded()) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (!player.isLoaded()) {
             message = "Please load a source before setting the repeat status.";
         } else {
             Player.RepeatState rep = player.getRepeatState();

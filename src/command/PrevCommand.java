@@ -13,7 +13,9 @@ public final class PrevCommand extends Command {
         User user = library.findUser(getUsername());
         Player player = user.getPlayer();
         String message = null;
-        if (!player.isLoaded()) {
+        if (user.isOffline()) {
+            message = user.getUsername() + " is offline.";
+        } else if (!player.isLoaded()) {
             message = "Please load a source before returning to the previous track.";
         } else {
             player.rewind();
