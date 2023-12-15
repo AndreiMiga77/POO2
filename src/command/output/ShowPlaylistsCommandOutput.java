@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public final class ShowPlaylistsCommandOutput extends CommandOutput {
+    private final String command = "showPlaylists";
     private String user;
     private Integer timestamp;
     private ArrayList<LinkedHashMap<String, Object>> result;
@@ -14,6 +15,10 @@ public final class ShowPlaylistsCommandOutput extends CommandOutput {
         this.user = user;
         this.timestamp = timestamp;
         this.result = data;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

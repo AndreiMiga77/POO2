@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class GetTop5PlaylistsCommandOutput extends CommandOutput {
+    private final String command = "getTop5Playlists";
     private Integer timestamp;
     private ArrayList<String> result;
 
     public GetTop5PlaylistsCommandOutput(final Integer timestamp, final List<String> playlists) {
         this.timestamp = timestamp;
         this.result = new ArrayList<>(playlists);
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public Integer getTimestamp() {

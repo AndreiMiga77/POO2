@@ -1,6 +1,7 @@
 package command.output;
 
 public final class AddAlbumCommandOutput extends CommandOutput {
+    private final String command = "addAlbum";
     private String user;
     private Integer timestamp;
     private String message;
@@ -8,6 +9,10 @@ public final class AddAlbumCommandOutput extends CommandOutput {
         this.user = u;
         this.timestamp = t;
         this.message = m;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

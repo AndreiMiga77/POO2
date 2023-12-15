@@ -1,6 +1,7 @@
 package command.output;
 
 public final class ForwardCommandOutput extends CommandOutput {
+    private final String command = "forward";
     private String user;
     private Integer timestamp;
     private String message;
@@ -8,6 +9,10 @@ public final class ForwardCommandOutput extends CommandOutput {
         this.user = user;
         this.timestamp = timestamp;
         this.message = message;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

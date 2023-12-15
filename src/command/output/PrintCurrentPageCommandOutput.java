@@ -2,12 +2,17 @@ package command.output;
 
 public final class PrintCurrentPageCommandOutput extends CommandOutput {
     private String user;
+    private final String command = "printCurrentPage";
     private Integer timestamp;
     private String message;
     public PrintCurrentPageCommandOutput(final String u, final Integer t, final String m) {
         this.user = u;
         this.timestamp = t;
         this.message = m;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

@@ -2,11 +2,8 @@ package command;
 
 import command.output.CommandOutput;
 import command.output.SearchCommandOutput;
-import library.Library;
-import library.User;
-import library.Song;
-import library.Podcast;
-import library.Playlist;
+import engine.Page;
+import library.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -70,6 +67,28 @@ public final class SearchCommand extends Command {
                 names.add(playlist.getName());
             }
             user.setLastSearch(playlists.subList(0, searchSize));
+            message = "Search returned " + searchSize + " results";
+        } else if (type.equals("album")) {
+            ArrayList<Album> albums = library.findAlbumsByFilter(filters);
+            int searchSize = Math.min(albums.size(), NUM_MATCHES);
+            for (Album album : albums.subList(0, searchSize)) {
+                names.add(album.getName());
+            }
+            user.setLastSearch(albums.subList(0, searchSize));
+            message = "Search returned " + searchSize + " results";
+        } else if (type.equals("artist")) {
+            ArrayList<Artist> artists = library.getArtists();
+            if (filters.containsKey("name")) {
+                String name = (String) filters.get("name");
+                artists.removeIf(artist -> !artist.getUsername().startsWith(name));
+            }
+            int searchSize = Math.min(artists.size(), NUM_MATCHES);
+            ArrayList<Page> pages = new ArrayList<>(searchSize);
+            for (Artist artist : artists.subList(0, searchSize)) {
+                names.add(artist.getUsername());
+                pages.add(artist.getHomePage());
+            }
+            user.setLastSearchedPages(pages);
             message = "Search returned " + searchSize + " results";
         }
         return new SearchCommandOutput(getUsername(), getTimestamp(), message, names);

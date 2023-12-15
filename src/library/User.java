@@ -21,6 +21,7 @@ public class User {
     private int age;
     private String city;
     private List<? extends Playable> lastSearch;
+    private List<? extends Page> lastSearchedPages;
     private int selectedSource;
     private Player player;
 
@@ -29,9 +30,10 @@ public class User {
     private ArrayList<Playlist> followedPlaylists;
     private UserType type;
     private boolean offline;
+    protected Page homePage;
     protected Page currentPage;
 
-    public User(final String username, final int age, final String city, final UserType type) {
+    public User(final String username, final int age, final String city) {
         this.username = username;
         this.age = age;
         this.city = city;
@@ -42,7 +44,8 @@ public class User {
         ownedPlaylists = new ArrayList<>();
         followedPlaylists = new ArrayList<>();
         offline = false;
-        currentPage = new HomePage(this);
+        homePage = new HomePage(this);
+        currentPage = homePage;
     }
 
     public User(final UserInput input) {
@@ -56,7 +59,8 @@ public class User {
         followedPlaylists = new ArrayList<>();
         type = UserType.USER;
         offline = false;
-        currentPage = new HomePage(this);
+        homePage = new HomePage(this);
+        currentPage = homePage;
     }
 
     public String getUsername() {
@@ -91,11 +95,16 @@ public class User {
         this.type = type;
     }
 
-    /**
-     * Get the current page
-     */
+    public Page getHomePage() {
+        return homePage;
+    }
+
     public Page getCurrentPage() {
         return currentPage;
+    }
+
+    public void setCurrentPage(final Page page) {
+        currentPage = page;
     }
 
     /**
@@ -110,6 +119,17 @@ public class User {
 
     public void setLastSearch(final List<? extends Playable> lastSearch) {
         this.lastSearch = lastSearch;
+    }
+
+    public List<Page> getLastSearchedPages() {
+        if (lastSearchedPages == null) {
+            return null;
+        }
+        return Collections.unmodifiableList(lastSearchedPages);
+    }
+
+    public void setLastSearchedPages(final List<? extends Page> lastSearchedPages) {
+        this.lastSearchedPages = lastSearchedPages;
     }
 
     public int getSelectedSource() {
@@ -130,7 +150,7 @@ public class User {
      * @param timestamp creation time
      */
     public void createPlaylist(final String name, final int timestamp) {
-        ownedPlaylists.add(new Playlist(name, timestamp));
+        ownedPlaylists.add(new Playlist(this, name, timestamp));
     }
 
     /**

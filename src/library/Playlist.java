@@ -5,16 +5,22 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Playlist implements Playable {
+    private User owner;
     private String name;
     private int creationTime;
     private ArrayList<Song> songs;
     private boolean isPrivate;
     private int followers;
 
-    public Playlist(final String name, final int time) {
+    public Playlist(final User owner, final String name, final int time) {
+        this.owner = owner;
         this.name = name;
         creationTime = time;
         songs = new ArrayList<>();
+    }
+
+    public User getOwner() {
+        return owner;
     }
 
     @Override

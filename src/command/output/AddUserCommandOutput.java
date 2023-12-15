@@ -1,6 +1,7 @@
 package command.output;
 
 public final class AddUserCommandOutput extends CommandOutput {
+    private final String command = "addUser";
     private String user;
     private Integer timestamp;
     private String message;
@@ -9,6 +10,10 @@ public final class AddUserCommandOutput extends CommandOutput {
         this.user = user;
         this.timestamp = timestamp;
         this.message = message;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

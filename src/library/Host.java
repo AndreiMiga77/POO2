@@ -8,7 +8,8 @@ public final class Host extends User {
     private ArrayList<Podcast> podcasts;
 
     public Host(final String username, final int age, final String city) {
-        super(username, age, city, UserType.HOST);
+        super(username, age, city);
+        setType(UserType.HOST);
         podcasts = new ArrayList<>();
     }
 

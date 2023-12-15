@@ -8,17 +8,16 @@ import java.util.ArrayList;
 
 public final class HomePage extends Page {
     public static final int NUM_MATCHES = 5;
-    User owner;
 
-    public HomePage(User user) {
-        owner = user;
+    public HomePage(User owner) {
+        super(owner);
     }
 
     @Override
     public String getContents() {
-        ArrayList<Song> likedSongs = new ArrayList<>(owner.getLikedSongs());
+        ArrayList<Song> likedSongs = new ArrayList<>(getOwner().getLikedSongs());
         likedSongs.sort((s1, s2) -> -Integer.compare(s2.getLikes(), s1.getLikes()));
-        ArrayList<Playlist> followedPlaylists = new ArrayList<>(owner.getFollowedPlaylists());
+        ArrayList<Playlist> followedPlaylists = new ArrayList<>(getOwner().getFollowedPlaylists());
         followedPlaylists.sort((p1, p2) -> {
             int numLikes1 = 0, numLikes2 = 0;
             for (Song song : p1.getSongs()) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ShowPreferredSongsCommandOutput extends CommandOutput {
+    private final String command = "showPreferredSongs";
     private String user;
     private Integer timestamp;
     private ArrayList<String> result;
@@ -14,6 +15,10 @@ public final class ShowPreferredSongsCommandOutput extends CommandOutput {
         this.user = user;
         this.timestamp = timestamp;
         this.result = new ArrayList<>(songs);
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

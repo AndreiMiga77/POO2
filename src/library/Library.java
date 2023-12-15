@@ -46,6 +46,9 @@ public final class Library {
         }
     }
 
+    /**
+     * Get a list of all users (of all types)
+     */
     public List<User> getUsers() {
         return Collections.unmodifiableList(users);
     }
@@ -56,6 +59,42 @@ public final class Library {
 
     public List<Podcast> getPodcasts() {
         return Collections.unmodifiableList(podcasts);
+    }
+
+    /**
+     * Get a list of all regular users
+     */
+    public ArrayList<User> getRegularUsers() {
+        ArrayList<User> regularUsers = new ArrayList<>();
+        for (User u : users) {
+            if (u.getType() == User.UserType.USER)
+                regularUsers.add(u);
+        }
+        return regularUsers;
+    }
+
+    /**
+     * Get a list of all artists
+     */
+    public ArrayList<Artist> getArtists() {
+        ArrayList<Artist> artists = new ArrayList<>();
+        for (User u : users) {
+            if (u.getType() == User.UserType.ARTIST)
+                artists.add((Artist) u);
+        }
+        return artists;
+    }
+
+    /**
+     * Get a list of all hosts
+     */
+    public ArrayList<Host> getHosts() {
+        ArrayList<Host> hosts = new ArrayList<>();
+        for (User u : users) {
+            if (u.getType() == User.UserType.HOST)
+                hosts.add((Host) u);
+        }
+        return hosts;
     }
 
     /**
@@ -188,5 +227,31 @@ public final class Library {
             filteredPlaylists.addAll(userPlaylists);
         }
         return filteredPlaylists;
+    }
+
+    /**
+     * Find albums that meet certain criteria
+     * @param filters criteria to apply
+     */
+    public ArrayList<Album> findAlbumsByFilter(final Map<String, Object> filters) {
+        ArrayList<Album> filteredAlbums = new ArrayList<>();
+        for (User u : users) {
+            if (u.getType() != User.UserType.ARTIST)
+                continue;
+            Artist a = (Artist) u;
+            if (filters.containsKey("owner") && !filters.get("owner").equals(a.getUsername())) {
+                continue;
+            }
+            filteredAlbums.addAll(a.getAlbums());
+        }
+        if (filters.containsKey("name")) {
+            String name = (String) filters.get("name");
+            filteredAlbums.removeIf(album -> !album.getName().startsWith(name));
+        }
+        if (filters.containsKey("description")) {
+            String description = (String) filters.get("description");
+            filteredAlbums.removeIf(album -> !album.getName().startsWith(description));
+        }
+        return filteredAlbums;
     }
 }

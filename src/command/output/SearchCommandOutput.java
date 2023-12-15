@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public final class SearchCommandOutput extends CommandOutput {
+    private final String command = "search";
     private String user;
     private Integer timestamp;
     private String message;
@@ -16,6 +17,10 @@ public final class SearchCommandOutput extends CommandOutput {
         this.timestamp = timestamp;
         this.message = message;
         this.results = new ArrayList<>(results);
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

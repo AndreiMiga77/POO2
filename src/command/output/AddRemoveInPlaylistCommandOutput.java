@@ -1,6 +1,7 @@
 package command.output;
 
 public final class AddRemoveInPlaylistCommandOutput extends CommandOutput {
+    private final String command = "addRemoveInPlaylist";
     private String user;
     private Integer timestamp;
     private String message;
@@ -8,6 +9,10 @@ public final class AddRemoveInPlaylistCommandOutput extends CommandOutput {
         this.user = u;
         this.timestamp = t;
         this.message = m;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

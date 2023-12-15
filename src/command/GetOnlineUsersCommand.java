@@ -12,7 +12,7 @@ public final class GetOnlineUsersCommand extends Command {
     @Override
     public CommandOutput execute() {
         Library library = Library.getInstance();
-        List<User> userList = library.getUsers();
+        ArrayList<User> userList = library.getRegularUsers();
         ArrayList<String> onlineUsers = new ArrayList<>(userList.size());
         for (User u : userList) {
             if (!u.isOffline())

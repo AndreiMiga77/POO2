@@ -3,6 +3,7 @@ package command;
 import command.output.AddUserCommandOutput;
 import command.output.CommandOutput;
 import library.Artist;
+import library.Host;
 import library.Library;
 import library.User;
 
@@ -29,8 +30,8 @@ public final class AddUserCommand extends Command {
         String message = null;
         if (library.findUser(getUsername()) == null) {
             switch (type) {
-                case "user" -> library.addUser(new User(getUsername(), age, city, User.UserType.USER));
-                case "host" -> library.addUser(new User(getUsername(), age, city, User.UserType.HOST));
+                case "user" -> library.addUser(new User(getUsername(), age, city));
+                case "host" -> library.addUser(new Host(getUsername(), age, city));
                 case "artist" -> library.addUser(new Artist(getUsername(), age, city));
             }
             message = "The username " + getUsername() + " has been added successfully.";

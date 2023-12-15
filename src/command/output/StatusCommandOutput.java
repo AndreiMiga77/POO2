@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public final class StatusCommandOutput extends CommandOutput {
+    private final String command = "status";
     private String user;
     private Integer timestamp;
     private LinkedHashMap<String, Object> stats;
@@ -13,6 +14,10 @@ public final class StatusCommandOutput extends CommandOutput {
         this.user = user;
         this.timestamp = timestamp;
         this.stats = stats;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public String getUser() {

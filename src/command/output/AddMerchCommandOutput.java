@@ -1,11 +1,11 @@
 package command.output;
 
-public final class NextCommandOutput extends CommandOutput {
-    private final String command = "next";
+public final class AddMerchCommandOutput extends CommandOutput {
+    private final String command = "addMerch";
     private String user;
     private Integer timestamp;
     private String message;
-    public NextCommandOutput(final String user, final Integer timestamp, final String message) {
+    public AddMerchCommandOutput(final String user, final Integer timestamp, final String message) {
         this.user = user;
         this.timestamp = timestamp;
         this.message = message;
