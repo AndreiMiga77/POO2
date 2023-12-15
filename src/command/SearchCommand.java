@@ -90,6 +90,20 @@ public final class SearchCommand extends Command {
             }
             user.setLastSearchedPages(pages);
             message = "Search returned " + searchSize + " results";
+        } else if (type.equals("host")) {
+            ArrayList<Host> hosts = library.getHosts();
+            if (filters.containsKey("name")) {
+                String name = (String) filters.get("name");
+                hosts.removeIf(host -> !host.getUsername().startsWith(name));
+            }
+            int searchSize = Math.min(hosts.size(), NUM_MATCHES);
+            ArrayList<Page> pages = new ArrayList<>(searchSize);
+            for (Host host : hosts.subList(0, searchSize)) {
+                names.add(host.getUsername());
+                pages.add(host.getHomePage());
+            }
+            user.setLastSearchedPages(pages);
+            message = "Search returned " + searchSize + " results";
         }
         return new SearchCommandOutput(getUsername(), getTimestamp(), message, names);
     }

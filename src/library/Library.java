@@ -192,6 +192,12 @@ public final class Library {
      */
     public ArrayList<Podcast> findPodcastsByFilter(final Map<String, Object> filters) {
         ArrayList<Podcast> filteredPodcasts = new ArrayList<>(podcasts);
+        for (User user : users) {
+            if (user.getType() == User.UserType.HOST) {
+                Host host = (Host) user;
+                filteredPodcasts.addAll(host.getPodcasts());
+            }
+        }
         if (filters.containsKey("name")) {
             String name = (String) filters.get("name");
             filteredPodcasts.removeIf(podcast -> !podcast.getName().startsWith(name));

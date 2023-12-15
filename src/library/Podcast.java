@@ -13,6 +13,15 @@ public final class Podcast implements Playable {
     private ArrayList<PodcastEpisode> episodes;
     private int listeners;
 
+    public Podcast(final String name, final String owner, final ArrayList<EpisodeInput> input) {
+        this.name = name;
+        this.owner = owner;
+        episodes = new ArrayList<>();
+        for (EpisodeInput episode : input) {
+            episodes.add(new PodcastEpisode(episode));
+        }
+    }
+
     public Podcast(final PodcastInput input) {
         name = input.getName();
         owner = input.getOwner();

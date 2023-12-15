@@ -1,6 +1,12 @@
 package command;
 
 import command.output.CommandOutput;
+import command.output.ShowAlbumsCommandOutput;
+import command.output.ShowPodcastsCommandOutput;
+import library.*;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class ShowPodcastsCommand extends Command {
     // What is this used for?
@@ -12,6 +18,24 @@ public class ShowPodcastsCommand extends Command {
 
     @Override
     public CommandOutput execute() {
-        return null;
+        Library library = Library.getInstance();
+        User user = library.findUser(getUsername());
+        if (user == null || user.getType() != User.UserType.HOST) {
+            return null;
+        } else {
+            Host host = (Host) user;
+            ArrayList<LinkedHashMap<String, Object>> podcastData = new ArrayList<>();
+            for (Podcast podcast : host.getPodcasts()) {
+                LinkedHashMap<String, Object> podcastHashMap = new LinkedHashMap<>();
+                podcastHashMap.put("name", podcast.getName());
+                ArrayList<String> episodeNames = new ArrayList<>();
+                for (PodcastEpisode episode : podcast.getEpisodes()) {
+                    episodeNames.add(episode.getName());
+                }
+                podcastHashMap.put("episodes", episodeNames);
+                podcastData.add(podcastHashMap);
+            }
+            return new ShowPodcastsCommandOutput(getUsername(), getTimestamp(), podcastData);
+        }
     }
 }
