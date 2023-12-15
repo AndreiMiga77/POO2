@@ -129,6 +129,11 @@ public final class Playlist implements Playable {
     }
 
     @Override
+    public boolean isEligibleForPlaylist() {
+        return false;
+    }
+
+    @Override
     public boolean isSeekable() {
         return false;
     }

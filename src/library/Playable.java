@@ -48,6 +48,11 @@ public interface Playable {
     boolean isPlaylistRepeatable();
 
     /**
+     * Whether the playable can be added to a playlist
+     */
+    boolean isEligibleForPlaylist();
+
+    /**
      * Whether the playable allows seeking by arbitrary amounts of time
      * Does not affect skipping or rewinding
      */

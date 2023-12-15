@@ -92,6 +92,11 @@ public final class Album implements Playable {
     }
 
     @Override
+    public boolean isEligibleForPlaylist() {
+        return true;
+    }
+
+    @Override
     public boolean isSeekable() {
         return false;
     }

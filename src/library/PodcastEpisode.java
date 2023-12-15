@@ -67,6 +67,11 @@ public final class PodcastEpisode implements Playable {
     }
 
     @Override
+    public boolean isEligibleForPlaylist() {
+        return false;
+    }
+
+    @Override
     public boolean isSeekable() {
         return false;
     }

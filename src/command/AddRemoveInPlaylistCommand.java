@@ -31,15 +31,15 @@ public final class AddRemoveInPlaylistCommand extends Command {
             message = "The specified playlist does not exist.";
         } else if (!player.isLoaded()) {
             message = "Please load a source before adding to or removing from the playlist.";
-        } else if (!(player.getCurrent() instanceof Song)) {
+        } else if (!player.getCurrentTrack().isEligibleForPlaylist()) {
             message = "The loaded source is not a song.";
         } else {
             List<Song> songs = playlist.getSongs();
-            if (!songs.contains((Song) player.getCurrent())) {
-                playlist.addSong((Song) player.getCurrent());
+            if (!songs.contains((Song) player.getCurrentTrack())) {
+                playlist.addSong((Song) player.getCurrentTrack());
                 message = "Successfully added to playlist.";
             } else {
-                playlist.removeSong((Song) player.getCurrent());
+                playlist.removeSong((Song) player.getCurrentTrack());
                 message = "Successfully removed from playlist.";
             }
         }

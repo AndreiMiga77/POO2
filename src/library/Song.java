@@ -117,6 +117,11 @@ public final class Song implements Playable {
     }
 
     @Override
+    public boolean isEligibleForPlaylist() {
+        return true;
+    }
+
+    @Override
     public boolean isSeekable() {
         return false;
     }

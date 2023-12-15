@@ -27,6 +27,7 @@ public class Artist extends User {
 
     public void removeAlbum(final Album album) {
         albums.remove(album);
+        album.delete();
     }
 
     public List<Album> getAlbums() {
