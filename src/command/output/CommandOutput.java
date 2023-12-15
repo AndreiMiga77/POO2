@@ -3,6 +3,7 @@ package command.output;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import command.AddUserCommand;
 
 
 @JsonTypeInfo(
@@ -30,6 +31,10 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
         @Type(value = ShowPreferredSongsCommandOutput.class, name = "showPreferredSongs"),
         @Type(value = GetTop5SongsCommandOutput.class, name = "getTop5Songs"),
         @Type(value = GetTop5PlaylistsCommandOutput.class, name = "getTop5Playlists"),
+        @Type(value = PrintCurrentPageCommandOutput.class, name = "printCurrentPage"),
+        @Type(value = AddUserCommandOutput.class, name = "addUser"),
+        @Type(value = AddAlbumCommandOutput.class, name = "addAlbum"),
+        @Type(value = ShowAlbumsCommandOutput.class, name = "showAlbums"),
         @Type(value = SwitchConnectionStatusCommandOutput.class, name = "switchConnectionStatus"),
         @Type(value = GetOnlineUsersCommandOutput.class, name = "getOnlineUsers"),
 })

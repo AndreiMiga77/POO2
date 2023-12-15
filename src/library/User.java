@@ -1,5 +1,7 @@
 package library;
 
+import engine.HomePage;
+import engine.Page;
 import fileio.input.UserInput;
 
 import engine.Player;
@@ -9,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public final class User {
+public class User {
     public enum UserType {
         USER,
         ARTIST,
@@ -25,8 +27,9 @@ public final class User {
     private ArrayList<Song> likedSongs;
     private ArrayList<Playlist> ownedPlaylists;
     private ArrayList<Playlist> followedPlaylists;
-    UserType type;
-    boolean offline;
+    private UserType type;
+    private boolean offline;
+    protected Page currentPage;
 
     public User(final String username, final int age, final String city, final UserType type) {
         this.username = username;
@@ -39,6 +42,7 @@ public final class User {
         ownedPlaylists = new ArrayList<>();
         followedPlaylists = new ArrayList<>();
         offline = false;
+        currentPage = new HomePage(this);
     }
 
     public User(final UserInput input) {
@@ -52,6 +56,7 @@ public final class User {
         followedPlaylists = new ArrayList<>();
         type = UserType.USER;
         offline = false;
+        currentPage = new HomePage(this);
     }
 
     public String getUsername() {
@@ -84,6 +89,13 @@ public final class User {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    /**
+     * Get the current page
+     */
+    public Page getCurrentPage() {
+        return currentPage;
     }
 
     /**
@@ -153,8 +165,9 @@ public final class User {
      * @param dif number of seconds to advance time
      */
     public void tickTime(final int dif) {
-        if (!offline)
+        if (!offline) {
             player.tickTime(dif);
+        }
     }
 
     /**
@@ -223,11 +236,18 @@ public final class User {
         }
     }
 
+    /**
+     * Get all followed playlists
+     */
+    public List<Playlist> getFollowedPlaylists() {
+        return Collections.unmodifiableList(followedPlaylists);
+    }
+
     public boolean isOffline() {
         return offline;
     }
 
-    public void setOffline(boolean offline) {
+    public void setOffline(final boolean offline) {
         this.offline = offline;
     }
 }

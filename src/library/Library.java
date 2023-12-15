@@ -103,6 +103,13 @@ public final class Library {
      */
     public ArrayList<Song> findSongsByFilter(final Map<String, Object> filters) {
         ArrayList<Song> filteredSongs = new ArrayList<>(songs);
+        for (User user : users) {
+            if (user.getType() == User.UserType.ARTIST) {
+                Artist artist = (Artist) user;
+                for (Album album : artist.getAlbums())
+                    filteredSongs.addAll(album.getSongs());
+            }
+        }
         if (filters.containsKey("name")) {
             String name = (String) filters.get("name");
             filteredSongs.removeIf(song -> !song.getName().startsWith(name));
