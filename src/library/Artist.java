@@ -56,4 +56,12 @@ public class Artist extends User {
     public List<Merch> getMerchItems() {
         return Collections.unmodifiableList(merchandise);
     }
+
+    @Override
+    public void delete() {
+        super.delete();
+        for (int i = 0; i < albums.size(); i++) {
+            albums.get(i).delete();
+        }
+    }
 }

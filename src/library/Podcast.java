@@ -10,8 +10,8 @@ import fileio.input.EpisodeInput;
 public final class Podcast implements Playable {
     private String name;
     private String owner;
-
     private ArrayList<PodcastEpisode> episodes;
+    private int listeners;
 
     public Podcast(final PodcastInput input) {
         name = input.getName();
@@ -83,5 +83,20 @@ public final class Podcast implements Playable {
     @Override
     public Playable getTrack(final int i) {
         return episodes.get(i);
+    }
+
+    @Override
+    public int getNumListeners() {
+        return listeners;
+    }
+
+    @Override
+    public void listen() {
+        listeners++;
+    }
+
+    @Override
+    public void stopListening() {
+        listeners--;
     }
 }

@@ -15,7 +15,8 @@ public final class Song implements Playable {
     private final String genre;
     private final int releaseYear;
     private final String artist;
-    private int likes;
+    private ArrayList<User> likers;
+    private int listeners;
 
     public Song(final SongInput input) {
         name = input.getName();
@@ -26,6 +27,7 @@ public final class Song implements Playable {
         genre = input.getGenre();
         releaseYear = input.getReleaseYear();
         artist = input.getArtist();
+        likers = new ArrayList<>();
     }
 
     @Override
@@ -63,21 +65,25 @@ public final class Song implements Playable {
     }
 
     public int getLikes() {
-        return likes;
+        return likers.size();
     }
 
     /**
      * Receive a like
      */
-    public void addLike() {
-        likes++;
+    public void addLike(User user) {
+        likers.add(user);
     }
 
     /**
      * Lose a like
      */
-    public void removeLike() {
-        likes--;
+    public void removeLike(User user) {
+        likers.remove(user);
+    }
+
+    public List<User> getLikers() {
+        return Collections.unmodifiableList(likers);
     }
 
     @Override
@@ -121,5 +127,20 @@ public final class Song implements Playable {
             return null;
         }
         return this;
+    }
+
+    @Override
+    public int getNumListeners() {
+        return listeners;
+    }
+
+    @Override
+    public void listen() {
+        listeners++;
+    }
+
+    @Override
+    public void stopListening() {
+        listeners--;
     }
 }

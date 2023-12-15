@@ -9,6 +9,7 @@ public final class Album implements Playable {
     private int releaseYear;
     private String description;
     private ArrayList<Song> songs;
+    private int listeners;
 
     public Album(String name, int releaseYear, String description, List<Song> songs) {
         this.name = name;
@@ -93,5 +94,29 @@ public final class Album implements Playable {
     @Override
     public boolean isSeekable() {
         return false;
+    }
+
+    @Override
+    public int getNumListeners() {
+        return listeners;
+    }
+
+    @Override
+    public void listen() {
+        listeners++;
+    }
+
+    @Override
+    public void stopListening() {
+        listeners--;
+    }
+
+    public void delete() {
+        for (int i = 0; i < songs.size(); i++) {
+            Song song = songs.get(i);
+            for (int j = song.getLikes() - 1; j >= 0; j--) {
+                song.getLikers().get(j).unlikeSong(song);
+            }
+        }
     }
 }

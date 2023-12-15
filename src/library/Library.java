@@ -254,4 +254,15 @@ public final class Library {
         }
         return filteredAlbums;
     }
+
+    /**
+     * Delete a user
+     * @param user user to delete
+     */
+    public void deleteUser(User user) {
+        if (users.contains(user)) {
+            users.remove(user);
+            user.delete();
+        }
+    }
 }

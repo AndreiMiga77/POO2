@@ -6,6 +6,7 @@ public final class PodcastEpisode implements Playable {
     private String name;
     private int duration;
     private String description;
+    private int listeners;
 
     public PodcastEpisode(final EpisodeInput input) {
         name = input.getName();
@@ -68,5 +69,20 @@ public final class PodcastEpisode implements Playable {
     @Override
     public boolean isSeekable() {
         return false;
+    }
+
+    @Override
+    public int getNumListeners() {
+        return listeners;
+    }
+
+    @Override
+    public void listen() {
+        listeners++;
+    }
+
+    @Override
+    public void stopListening() {
+        listeners--;
     }
 }

@@ -10,13 +10,15 @@ public final class Playlist implements Playable {
     private int creationTime;
     private ArrayList<Song> songs;
     private boolean isPrivate;
-    private int followers;
+    private ArrayList<User> followers;
+    private int listeners;
 
     public Playlist(final User owner, final String name, final int time) {
         this.owner = owner;
         this.name = name;
         creationTime = time;
         songs = new ArrayList<>();
+        followers = new ArrayList<>();
     }
 
     public User getOwner() {
@@ -65,21 +67,21 @@ public final class Playlist implements Playable {
     }
 
     public int getFollowers() {
-        return followers;
+        return followers.size();
     }
 
     /**
      * Receive a follower
      */
-    public void addFollower() {
-        followers++;
+    public void addFollower(User user) {
+        followers.add(user);
     }
 
     /**
      * Lose a follower
      */
-    public void removeFollower() {
-        followers--;
+    public void removeFollower(User user) {
+        followers.remove(user);
     }
 
     @Override
@@ -129,5 +131,26 @@ public final class Playlist implements Playable {
     @Override
     public boolean isSeekable() {
         return false;
+    }
+
+    @Override
+    public int getNumListeners() {
+        return listeners;
+    }
+
+    @Override
+    public void listen() {
+        listeners++;
+    }
+
+    @Override
+    public void stopListening() {
+        listeners--;
+    }
+
+    public void delete() {
+        for (int i = 0; i < followers.size(); i++) {
+            followers.get(i).unfollowPlaylist(this);
+        }
     }
 }

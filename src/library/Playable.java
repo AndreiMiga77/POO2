@@ -52,4 +52,19 @@ public interface Playable {
      * Does not affect skipping or rewinding
      */
     boolean isSeekable();
+
+    /**
+     * Number of users listening to the playable
+     */
+    int getNumListeners();
+
+    /**
+     * Add one listener
+     */
+    void listen();
+
+    /**
+     * Remove one listener
+     */
+    void stopListening();
 }

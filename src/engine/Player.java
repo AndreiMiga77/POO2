@@ -102,6 +102,7 @@ public final class Player {
         shuffled = false;
         paused = false;
         current = track;
+        current.listen();
         trackIndexList = new ArrayList<>(track.getNumTracks());
         for (int i = 0; i < track.getNumTracks(); i++) {
             trackIndexList.add(i);
@@ -139,6 +140,7 @@ public final class Player {
             }
             timestampsRemembered.put(current, prevTime + currentTime);
         }
+        current.stopListening();
         current = null;
         paused = true;
         shuffled = false;

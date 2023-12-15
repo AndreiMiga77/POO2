@@ -43,6 +43,7 @@ public class User {
         likedSongs = new ArrayList<>();
         ownedPlaylists = new ArrayList<>();
         followedPlaylists = new ArrayList<>();
+        type = UserType.USER;
         offline = false;
         homePage = new HomePage(this);
         currentPage = homePage;
@@ -205,7 +206,7 @@ public class User {
     public void likeSong(final Song song) {
         if (!likedSongs.contains(song)) {
             likedSongs.add(song);
-            song.addLike();
+            song.addLike(this);
         }
     }
 
@@ -215,7 +216,7 @@ public class User {
      */
     public void unlikeSong(final Song song) {
         if (likedSongs.remove(song)) {
-            song.removeLike();
+            song.removeLike(this);
         }
 
     }
@@ -242,7 +243,7 @@ public class User {
     public  void followPlaylist(final Playlist playlist) {
         if (!followedPlaylists.contains(playlist)) {
             followedPlaylists.add(playlist);
-            playlist.addFollower();
+            playlist.addFollower(this);
         }
     }
 
@@ -252,7 +253,7 @@ public class User {
      */
     public void unfollowPlaylist(final Playlist playlist) {
         if (followedPlaylists.remove(playlist)) {
-            playlist.removeFollower();
+            playlist.removeFollower(this);
         }
     }
 
@@ -269,5 +270,17 @@ public class User {
 
     public void setOffline(final boolean offline) {
         this.offline = offline;
+    }
+
+    public void delete() {
+        for (int i = 0; i < likedSongs.size(); i++) {
+            unlikeSong(likedSongs.get(i));
+        }
+        for (int i = 0; i < followedPlaylists.size(); i++) {
+            unfollowPlaylist(followedPlaylists.get(i));
+        }
+        for (int i = 0; i < ownedPlaylists.size(); i++) {
+            ownedPlaylists.get(i).delete();
+        }
     }
 }
