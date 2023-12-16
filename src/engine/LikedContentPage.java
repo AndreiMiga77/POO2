@@ -7,7 +7,7 @@ import library.User;
 import java.util.ArrayList;
 
 public final class LikedContentPage extends Page {
-    public LikedContentPage(User owner) {
+    public LikedContentPage(final User owner) {
         super(owner);
     }
 
@@ -17,7 +17,9 @@ public final class LikedContentPage extends Page {
         ArrayList<Playlist> followedPlaylists = new ArrayList<>(getOwner().getFollowedPlaylists());
         StringBuilder value = new StringBuilder("Liked songs:\n\t[");
         if (!likedSongs.isEmpty()) {
-            value.append(likedSongs.get(0).getName()).append(" - ").append(likedSongs.get(0).getArtist());
+            value.append(likedSongs.get(0).getName())
+                    .append(" - ")
+                    .append(likedSongs.get(0).getArtist());
             for (int i = 1; i < likedSongs.size(); i++) {
                 value.append(", ").append(likedSongs.get(i).getName());
             }

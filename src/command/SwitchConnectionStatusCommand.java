@@ -5,7 +5,7 @@ import command.output.SwitchConnectionStatusCommandOutput;
 import library.Library;
 import library.User;
 
-public class SwitchConnectionStatusCommand extends Command {
+public final class SwitchConnectionStatusCommand extends Command {
     @Override
     public CommandOutput execute() {
         Library library = Library.getInstance();

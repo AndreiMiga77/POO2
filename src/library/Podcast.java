@@ -113,4 +113,14 @@ public final class Podcast implements Playable {
     public void stopListening() {
         listeners--;
     }
+
+    /**
+     * Delete the podcast
+     */
+    public void delete() {
+        Library library = Library.getInstance();
+        for (User u : library.getUsers()) {
+            u.getPlayer().removeTimestamp(this);
+        }
+    }
 }

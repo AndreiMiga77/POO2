@@ -3,7 +3,11 @@ package command;
 import command.output.AddAlbumCommandOutput;
 import command.output.CommandOutput;
 import fileio.input.SongInput;
-import library.*;
+import library.Library;
+import library.User;
+import library.Artist;
+import library.Album;
+import library.Song;
 
 import java.util.ArrayList;
 import java.util.List;

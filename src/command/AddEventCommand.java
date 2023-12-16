@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class AddEventCommand extends Command {
+public final class AddEventCommand extends Command {
     private String name;
     private String description;
     private String date;

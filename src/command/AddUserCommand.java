@@ -30,9 +30,9 @@ public final class AddUserCommand extends Command {
         String message = null;
         if (library.findUser(getUsername()) == null) {
             switch (type) {
-                case "user" -> library.addUser(new User(getUsername(), age, city));
                 case "host" -> library.addUser(new Host(getUsername(), age, city));
                 case "artist" -> library.addUser(new Artist(getUsername(), age, city));
+                default -> library.addUser(new User(getUsername(), age, city));
             }
             message = "The username " + getUsername() + " has been added successfully.";
         } else {

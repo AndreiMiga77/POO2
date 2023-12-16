@@ -11,7 +11,10 @@ public final class Album implements Playable {
     private ArrayList<Song> songs;
     private int listeners;
 
-    public Album(String name, int releaseYear, String description, List<Song> songs) {
+    public Album(final String name,
+                 final int releaseYear,
+                 final String description,
+                 final List<Song> songs) {
         this.name = name;
         this.releaseYear = releaseYear;
         this.description = description;
@@ -62,7 +65,7 @@ public final class Album implements Playable {
     }
 
     @Override
-    public Playable getTrack(int i) {
+    public Playable getTrack(final int i) {
         return songs.get(i);
     }
 
@@ -116,6 +119,9 @@ public final class Album implements Playable {
         listeners--;
     }
 
+    /**
+     * Delete the album
+     */
     public void delete() {
         for (int i = 0; i < songs.size(); i++) {
             Song song = songs.get(i);
@@ -123,5 +129,16 @@ public final class Album implements Playable {
                 song.getLikers().get(j).unlikeSong(song);
             }
         }
+    }
+
+    /**
+     * Total likes from all songs on the album
+     */
+    public int getTotalLikes() {
+        int likes = 0;
+        for (Song s : songs) {
+            likes += s.getLikes();
+        }
+        return likes;
     }
 }

@@ -1,14 +1,17 @@
 package command;
 
 import command.output.CommandOutput;
-import command.output.ShowAlbumsCommandOutput;
 import command.output.ShowPodcastsCommandOutput;
-import library.*;
+import library.Library;
+import library.User;
+import library.Host;
+import library.Podcast;
+import library.PodcastEpisode;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-public class ShowPodcastsCommand extends Command {
+public final class ShowPodcastsCommand extends Command {
     // What is this used for?
     private Integer playlistId;
 

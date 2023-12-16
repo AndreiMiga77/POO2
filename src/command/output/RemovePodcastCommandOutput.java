@@ -1,16 +1,14 @@
 package command.output;
 
-public final class RemoveAnnouncementCommandOutput extends CommandOutput {
-    private final String command = "removeAnnouncement";
+public final class RemovePodcastCommandOutput extends CommandOutput {
+    private final String command = "removePodcast";
     private String user;
     private Integer timestamp;
     private String message;
-    public RemoveAnnouncementCommandOutput(final String user,
-                                           final Integer timestamp,
-                                           final String message) {
-        this.user = user;
-        this.timestamp = timestamp;
-        this.message = message;
+    public RemovePodcastCommandOutput(final String u, final Integer t, final String m) {
+        this.user = u;
+        this.timestamp = t;
+        this.message = m;
     }
 
     public String getCommand() {

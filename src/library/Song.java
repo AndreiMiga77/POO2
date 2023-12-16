@@ -71,14 +71,14 @@ public final class Song implements Playable {
     /**
      * Receive a like
      */
-    public void addLike(User user) {
+    public void addLike(final User user) {
         likers.add(user);
     }
 
     /**
      * Lose a like
      */
-    public void removeLike(User user) {
+    public void removeLike(final User user) {
         likers.remove(user);
     }
 

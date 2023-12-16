@@ -1,6 +1,5 @@
 package library;
 
-import engine.ArtistPage;
 import engine.HostPage;
 
 import java.util.ArrayList;
@@ -20,23 +19,40 @@ public final class Host extends User {
         currentPage = homePage;
     }
 
-    public void addPodcast(Podcast podcast) {
+    /**
+     * Add a new podcast, owned by this host
+     * @param podcast podcast to add
+     */
+    public void addPodcast(final Podcast podcast) {
         podcasts.add(podcast);
     }
 
-    public void removePodcast(Podcast podcast) {
+    /**
+     * Remove a host's podcast
+     * @param podcast podcast to remove
+     */
+    public void removePodcast(final Podcast podcast) {
         podcasts.remove(podcast);
+        podcast.delete();
     }
 
     public List<Podcast> getPodcasts() {
         return Collections.unmodifiableList(podcasts);
     }
 
-    public void addAnnouncement(Announcement announcement) {
+    /**
+     * Add an announcement to the host's page
+     * @param announcement announcement to add
+     */
+    public void addAnnouncement(final Announcement announcement) {
         announcements.add(announcement);
     }
 
-    public void removeAnnouncement(Announcement announcement) {
+    /**
+     * Remove announcement from the host's page
+     * @param announcement announcement to remove
+     */
+    public void removeAnnouncement(final Announcement announcement) {
         announcements.remove(announcement);
     }
 

@@ -1,14 +1,13 @@
 package command.output;
 
-public final class SwitchConnectionStatusCommandOutput extends CommandOutput {
-    private final String command = "switchConnectionStatus";
+public final class RemoveEventCommandOutput extends CommandOutput {
+    private final String command = "removeEvent";
     private String user;
     private Integer timestamp;
     private String message;
-
-    public SwitchConnectionStatusCommandOutput(final String user,
-                                               final Integer timestamp,
-                                               final String message) {
+    public RemoveEventCommandOutput(final String user,
+                                    final Integer timestamp,
+                                    final String message) {
         this.user = user;
         this.timestamp = timestamp;
         this.message = message;
@@ -30,7 +29,15 @@ public final class SwitchConnectionStatusCommandOutput extends CommandOutput {
         return timestamp;
     }
 
+    public void setTimestamp(final Integer timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(final String message) {
+        this.message = message;
     }
 }

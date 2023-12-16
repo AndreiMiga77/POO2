@@ -24,7 +24,7 @@ public final class ShuffleCommand extends Command {
         } else if (!player.isLoaded()) {
             message = "Please load a source before using the shuffle function.";
         } else if (!player.getCurrent().allowsShuffling()) {
-            message = "The loaded source is not a playlist.";
+            message = "The loaded source is not a playlist or an album.";
         } else {
             if (player.isShuffled()) {
                 player.unshuffle();

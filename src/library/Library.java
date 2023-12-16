@@ -53,8 +53,17 @@ public final class Library {
         return Collections.unmodifiableList(users);
     }
 
-    public List<Song> getSongs() {
-        return Collections.unmodifiableList(songs);
+    /**
+     * Get a list of all songs on the platform
+     */
+    public ArrayList<Song> getSongs() {
+        ArrayList<Song> allSongs = new ArrayList<>(songs);
+        for (Artist u : getArtists()) {
+            for (Album a : u.getAlbums()) {
+                allSongs.addAll(a.getSongs());
+            }
+        }
+        return allSongs;
     }
 
     public List<Podcast> getPodcasts() {
@@ -67,8 +76,9 @@ public final class Library {
     public ArrayList<User> getRegularUsers() {
         ArrayList<User> regularUsers = new ArrayList<>();
         for (User u : users) {
-            if (u.getType() == User.UserType.USER)
+            if (u.getType() == User.UserType.USER) {
                 regularUsers.add(u);
+            }
         }
         return regularUsers;
     }
@@ -79,8 +89,9 @@ public final class Library {
     public ArrayList<Artist> getArtists() {
         ArrayList<Artist> artists = new ArrayList<>();
         for (User u : users) {
-            if (u.getType() == User.UserType.ARTIST)
+            if (u.getType() == User.UserType.ARTIST) {
                 artists.add((Artist) u);
+            }
         }
         return artists;
     }
@@ -91,8 +102,9 @@ public final class Library {
     public ArrayList<Host> getHosts() {
         ArrayList<Host> hosts = new ArrayList<>();
         for (User u : users) {
-            if (u.getType() == User.UserType.HOST)
+            if (u.getType() == User.UserType.HOST) {
                 hosts.add((Host) u);
+            }
         }
         return hosts;
     }
@@ -145,8 +157,9 @@ public final class Library {
         for (User user : users) {
             if (user.getType() == User.UserType.ARTIST) {
                 Artist artist = (Artist) user;
-                for (Album album : artist.getAlbums())
+                for (Album album : artist.getAlbums()) {
                     filteredSongs.addAll(album.getSongs());
+                }
             }
         }
         if (filters.containsKey("name")) {
@@ -242,8 +255,9 @@ public final class Library {
     public ArrayList<Album> findAlbumsByFilter(final Map<String, Object> filters) {
         ArrayList<Album> filteredAlbums = new ArrayList<>();
         for (User u : users) {
-            if (u.getType() != User.UserType.ARTIST)
+            if (u.getType() != User.UserType.ARTIST) {
                 continue;
+            }
             Artist a = (Artist) u;
             if (filters.containsKey("owner") && !filters.get("owner").equals(a.getUsername())) {
                 continue;
@@ -265,7 +279,7 @@ public final class Library {
      * Delete a user
      * @param user user to delete
      */
-    public void deleteUser(User user) {
+    public void deleteUser(final User user) {
         if (users.contains(user)) {
             users.remove(user);
             user.delete();

@@ -3,7 +3,15 @@ package command;
 import command.output.CommandOutput;
 import command.output.SearchCommandOutput;
 import engine.Page;
-import library.*;
+import library.Library;
+import library.User;
+import library.Song;
+import library.Playable;
+import library.Podcast;
+import library.Playlist;
+import library.Album;
+import library.Artist;
+import library.Host;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -38,11 +46,19 @@ public final class SearchCommand extends Command {
 
         if (user.isOffline()) {
             message = user.getUsername() + " is offline.";
-            return new SearchCommandOutput(getUsername(), getTimestamp(), message, new ArrayList<>());
+            return new SearchCommandOutput(getUsername(),
+                    getTimestamp(),
+                    message,
+                    new ArrayList<>());
         }
 
         user.getPlayer().unload();
-        user.setSelectedSource(-1);
+        if (user.getSelectedSource() >= 0 && user.getLastSearch() != null) {
+            for (Playable p : user.getLastSearch()) {
+                p.stopListening();
+            }
+            user.setSelectedSource(-1);
+        }
 
         if (type.equals("song")) {
             ArrayList<Song> songs = library.findSongsByFilter(filters);
@@ -51,6 +67,9 @@ public final class SearchCommand extends Command {
                 names.add(song.getName());
             }
             user.setLastSearch(songs.subList(0, searchSize));
+            for (Playable p : user.getLastSearch()) {
+                p.listen();
+            }
             message = "Search returned " + searchSize + " results";
         } else if (type.equals("podcast")) {
             ArrayList<Podcast> podcasts = library.findPodcastsByFilter(filters);
@@ -59,6 +78,9 @@ public final class SearchCommand extends Command {
                 names.add(podcast.getName());
             }
             user.setLastSearch(podcasts.subList(0, searchSize));
+            for (Playable p : user.getLastSearch()) {
+                p.listen();
+            }
             message = "Search returned " + searchSize + " results";
         } else if (type.equals("playlist")) {
             ArrayList<Playlist> playlists = library.findPlaylistsByFilter(filters, user);
@@ -67,6 +89,9 @@ public final class SearchCommand extends Command {
                 names.add(playlist.getName());
             }
             user.setLastSearch(playlists.subList(0, searchSize));
+            for (Playable p : user.getLastSearch()) {
+                p.listen();
+            }
             message = "Search returned " + searchSize + " results";
         } else if (type.equals("album")) {
             ArrayList<Album> albums = library.findAlbumsByFilter(filters);
@@ -75,6 +100,9 @@ public final class SearchCommand extends Command {
                 names.add(album.getName());
             }
             user.setLastSearch(albums.subList(0, searchSize));
+            for (Playable p : user.getLastSearch()) {
+                p.listen();
+            }
             message = "Search returned " + searchSize + " results";
         } else if (type.equals("artist")) {
             ArrayList<Artist> artists = library.getArtists();

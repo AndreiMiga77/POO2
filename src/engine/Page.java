@@ -5,6 +5,10 @@ import library.User;
 public abstract class Page {
     private User owner;
     private int visitors;
+
+    /**
+     * Get contents of the page as string
+     */
     public abstract String getContents();
 
     public Page(final User owner) {
@@ -12,19 +16,25 @@ public abstract class Page {
         this.visitors = 0;
     }
 
-    public User getOwner() {
+    public final User getOwner() {
         return owner;
     }
 
-    public int getVisitors() {
+    public final int getVisitors() {
         return visitors;
     }
 
-    public void visit() {
+    /**
+     * Add a new visitor to the page
+     */
+    public final void visit() {
         visitors++;
     }
 
-    public void unvisit() {
+    /**
+     * Remove a visitor from the page
+     */
+    public final void unvisit() {
         visitors--;
     }
 }

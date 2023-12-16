@@ -5,7 +5,9 @@ public final class AddAnnouncementCommandOutput extends CommandOutput {
     private String user;
     private Integer timestamp;
     private String message;
-    public AddAnnouncementCommandOutput(final String user, final Integer timestamp, final String message) {
+    public AddAnnouncementCommandOutput(final String user,
+                                        final Integer timestamp,
+                                        final String message) {
         this.user = user;
         this.timestamp = timestamp;
         this.message = message;

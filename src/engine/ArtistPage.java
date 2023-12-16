@@ -5,7 +5,7 @@ import library.Artist;
 import java.time.format.DateTimeFormatter;
 
 public final class ArtistPage extends Page {
-    public ArtistPage(Artist user) {
+    public ArtistPage(final Artist user) {
         super(user);
     }
 
@@ -39,14 +39,16 @@ public final class ArtistPage extends Page {
         if (!owner.getEvents().isEmpty()) {
             value.append(owner.getEvents().get(0).getName())
                     .append(" - ")
-                    .append(owner.getEvents().get(0).getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                    .append(owner.getEvents().get(0)
+                            .getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                     .append(":\n\t")
                     .append(owner.getEvents().get(0).getDescription());
             for (int i = 1; i < owner.getEvents().size(); i++) {
                 value.append(", ")
                         .append(owner.getEvents().get(i).getName())
                         .append(" - ")
-                        .append(owner.getEvents().get(i).getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                        .append(owner.getEvents().get(i)
+                                .getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                         .append(":\n\t")
                         .append(owner.getEvents().get(i).getDescription());
             }

@@ -6,7 +6,9 @@ public final class DeleteUserCommandOutput extends CommandOutput {
     private Integer timestamp;
     private String message;
 
-    public DeleteUserCommandOutput(final String user, final Integer timestamp, final String message) {
+    public DeleteUserCommandOutput(final String user,
+                                   final Integer timestamp,
+                                   final String message) {
         this.user = user;
         this.timestamp = timestamp;
         this.message = message;

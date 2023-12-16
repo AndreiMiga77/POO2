@@ -8,7 +8,9 @@ public final class ShowAlbumsCommandOutput extends CommandOutput {
     private String user;
     private Integer timestamp;
     private ArrayList<LinkedHashMap<String, Object>> result;
-    public ShowAlbumsCommandOutput(final String u, final Integer t, final ArrayList<LinkedHashMap<String, Object>> r) {
+    public ShowAlbumsCommandOutput(final String u,
+                                   final Integer t,
+                                   final ArrayList<LinkedHashMap<String, Object>> r) {
         this.user = u;
         this.timestamp = t;
         this.result = r;

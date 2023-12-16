@@ -1,16 +1,17 @@
 package command;
 
-import command.output.AddAlbumCommandOutput;
 import command.output.AddPodcastCommandOutput;
 import command.output.CommandOutput;
 import fileio.input.EpisodeInput;
-import fileio.input.SongInput;
-import library.*;
+import library.Library;
+import library.User;
+import library.Host;
+import library.Podcast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddPodcastCommand extends Command {
+public final class AddPodcastCommand extends Command {
     private String name;
     private ArrayList<EpisodeInput> episodes;
 

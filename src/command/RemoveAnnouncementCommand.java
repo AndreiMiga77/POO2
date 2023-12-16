@@ -1,6 +1,5 @@
 package command;
 
-import command.output.AddAnnouncementCommandOutput;
 import command.output.CommandOutput;
 import command.output.RemoveAnnouncementCommandOutput;
 import library.Announcement;
@@ -10,7 +9,7 @@ import library.User;
 
 import java.util.List;
 
-public class RemoveAnnouncementCommand extends Command {
+public final class RemoveAnnouncementCommand extends Command {
     private String name;
 
     public String getName() {

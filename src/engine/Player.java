@@ -132,6 +132,7 @@ public final class Player {
         if (current == null) {
             return;
         }
+        current.stopListening();
         int currentTrackId = trackIndexList.get(currentTrackIndex);
         if (current.remembersTimestamp()) {
             int prevTime = 0;
@@ -140,7 +141,6 @@ public final class Player {
             }
             timestampsRemembered.put(current, prevTime + currentTime);
         }
-        current.stopListening();
         current = null;
         paused = true;
         shuffled = false;
@@ -292,5 +292,13 @@ public final class Player {
 
     public void setRepeatState(final RepeatState repeatState) {
         this.repeatState = repeatState;
+    }
+
+    /**
+     * Forget the timestamp for a podcast
+     * @param p the podcast
+     */
+    public void removeTimestamp(final Playable p) {
+        timestampsRemembered.remove(p);
     }
 }

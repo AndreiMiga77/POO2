@@ -64,84 +64,93 @@ public class User {
         currentPage = homePage;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public void setUsername(final String username) {
+    public final void setUsername(final String username) {
         this.username = username;
     }
 
-    public int getAge() {
+    public final int getAge() {
         return age;
     }
 
-    public void setAge(final int age) {
+    public final void setAge(final int age) {
         this.age = age;
     }
 
-    public String getCity() {
+    public final String getCity() {
         return city;
     }
 
-    public void setCity(final String city) {
+    public final void setCity(final String city) {
         this.city = city;
     }
 
-    public UserType getType() {
+    public final UserType getType() {
         return type;
     }
 
-    public void setType(UserType type) {
+    public final void setType(final UserType type) {
         this.type = type;
     }
 
-    public Page getHomePage() {
+    public final Page getHomePage() {
         return homePage;
     }
 
-    public Page getCurrentPage() {
+    public final Page getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(final Page page) {
+    /**
+     * Set the page that the user is visiting
+     * @param page the page
+     */
+    public final void setCurrentPage(final Page page) {
+        currentPage.unvisit();
         currentPage = page;
+        page.visit();
     }
 
     /**
      * Get the last searched items
      */
-    public List<Playable> getLastSearch() {
+    public final List<Playable> getLastSearch() {
         if (lastSearch == null) {
             return null;
         }
         return Collections.unmodifiableList(lastSearch);
     }
 
-    public void setLastSearch(final List<? extends Playable> lastSearch) {
+    public final void setLastSearch(final List<? extends Playable> lastSearch) {
         this.lastSearch = lastSearch;
     }
 
-    public List<Page> getLastSearchedPages() {
+    /**
+     * Results of the last "search" command for a page
+     */
+    public final List<Page> getLastSearchedPages() {
         if (lastSearchedPages == null) {
             return null;
         }
         return Collections.unmodifiableList(lastSearchedPages);
     }
 
-    public void setLastSearchedPages(final List<? extends Page> lastSearchedPages) {
+    public final void setLastSearchedPages(final List<? extends Page> lastSearchedPages) {
         this.lastSearchedPages = lastSearchedPages;
     }
 
-    public int getSelectedSource() {
+    public final int getSelectedSource() {
         return selectedSource;
     }
 
-    public void setSelectedSource(final int selectedSource) {
+    public final void setSelectedSource(final int selectedSource) {
         this.selectedSource = selectedSource;
     }
 
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 
@@ -150,7 +159,7 @@ public class User {
      * @param name name of the playlist
      * @param timestamp creation time
      */
-    public void createPlaylist(final String name, final int timestamp) {
+    public final void createPlaylist(final String name, final int timestamp) {
         ownedPlaylists.add(new Playlist(this, name, timestamp));
     }
 
@@ -158,7 +167,7 @@ public class User {
      * Get a playlist
      * @param id zero-based index
      */
-    public Playlist getPlaylist(final int id) {
+    public final Playlist getPlaylist(final int id) {
         if (id >= ownedPlaylists.size()) {
             return null;
         }
@@ -169,7 +178,7 @@ public class User {
      * Get a playlist
      * @param name playlist's name
      */
-    public Playlist getPlaylist(final String name) {
+    public final Playlist getPlaylist(final String name) {
         Stream<Playlist> stream = ownedPlaylists.stream();
         return stream.filter(playlist -> playlist.getName().equals(name)).findAny().orElse(null);
     }
@@ -177,7 +186,7 @@ public class User {
     /**
      * Get all owned playlists
      */
-    public List<Playlist> getPlaylists() {
+    public final List<Playlist> getPlaylists() {
         return Collections.unmodifiableList(ownedPlaylists);
     }
 
@@ -185,7 +194,7 @@ public class User {
      * Advance the time for the user's player
      * @param dif number of seconds to advance time
      */
-    public void tickTime(final int dif) {
+    public final void tickTime(final int dif) {
         if (!offline) {
             player.tickTime(dif);
         }
@@ -195,7 +204,7 @@ public class User {
      * Whether the song was liked by the user
      * @param song song to check
      */
-    public boolean hasLikedSong(final Song song) {
+    public final boolean hasLikedSong(final Song song) {
         return likedSongs.contains(song);
     }
 
@@ -203,7 +212,7 @@ public class User {
      * Like a song
      * @param song song to like
      */
-    public void likeSong(final Song song) {
+    public final void likeSong(final Song song) {
         if (!likedSongs.contains(song)) {
             likedSongs.add(song);
             song.addLike(this);
@@ -214,7 +223,7 @@ public class User {
      * Unlike a song
      * @param song song to unlike
      */
-    public void unlikeSong(final Song song) {
+    public final void unlikeSong(final Song song) {
         if (likedSongs.remove(song)) {
             song.removeLike(this);
         }
@@ -224,7 +233,7 @@ public class User {
     /**
      * Get all liked songs
      */
-    public List<Song> getLikedSongs() {
+    public final List<Song> getLikedSongs() {
         return Collections.unmodifiableList(likedSongs);
     }
 
@@ -232,7 +241,7 @@ public class User {
      * Whether the playlist was followed by the user
      * @param playlist playlist to check
      */
-    public boolean hasFollowedPlaylist(final Playlist playlist) {
+    public final boolean hasFollowedPlaylist(final Playlist playlist) {
         return followedPlaylists.contains(playlist);
     }
 
@@ -240,7 +249,7 @@ public class User {
      * Follow a playlist
      * @param playlist playlist to follow
      */
-    public  void followPlaylist(final Playlist playlist) {
+    public final void followPlaylist(final Playlist playlist) {
         if (!followedPlaylists.contains(playlist)) {
             followedPlaylists.add(playlist);
             playlist.addFollower(this);
@@ -251,7 +260,7 @@ public class User {
      * Unfollow a playlist
      * @param playlist playlist to unfollow
      */
-    public void unfollowPlaylist(final Playlist playlist) {
+    public final void unfollowPlaylist(final Playlist playlist) {
         if (followedPlaylists.remove(playlist)) {
             playlist.removeFollower(this);
         }
@@ -260,19 +269,23 @@ public class User {
     /**
      * Get all followed playlists
      */
-    public List<Playlist> getFollowedPlaylists() {
+    public final List<Playlist> getFollowedPlaylists() {
         return Collections.unmodifiableList(followedPlaylists);
     }
 
-    public boolean isOffline() {
+    public final boolean isOffline() {
         return offline;
     }
 
-    public void setOffline(final boolean offline) {
+    public final void setOffline(final boolean offline) {
         this.offline = offline;
     }
 
+    /**
+     * Delete the user
+     */
     public void delete() {
+        player.unload();
         for (int i = 0; i < likedSongs.size(); i++) {
             unlikeSong(likedSongs.get(i));
         }

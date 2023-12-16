@@ -6,7 +6,6 @@ import library.Library;
 import library.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public final class GetOnlineUsersCommand extends Command {
     @Override
@@ -15,8 +14,9 @@ public final class GetOnlineUsersCommand extends Command {
         ArrayList<User> userList = library.getRegularUsers();
         ArrayList<String> onlineUsers = new ArrayList<>(userList.size());
         for (User u : userList) {
-            if (!u.isOffline())
+            if (!u.isOffline()) {
                 onlineUsers.add(u.getUsername());
+            }
         }
         return new GetOnlineUsersCommandOutput(getTimestamp(), onlineUsers);
     }

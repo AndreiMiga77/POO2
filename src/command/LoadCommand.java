@@ -20,6 +20,9 @@ public final class LoadCommand extends Command {
         } else if (lastSearch == null || user.getSelectedSource() < 0) {
             message = "Please select a source before attempting to load.";
         } else {
+            for (Playable p : lastSearch) {
+                p.stopListening();
+            }
             user.getPlayer().load(lastSearch.get(user.getSelectedSource()));
             user.setSelectedSource(-1);
             user.setLastSearch(null);

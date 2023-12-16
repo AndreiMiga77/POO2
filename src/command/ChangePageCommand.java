@@ -2,12 +2,11 @@ package command;
 
 import command.output.ChangePageCommandOutput;
 import command.output.CommandOutput;
-import command.output.CreatePlaylistCommandOutput;
 import engine.LikedContentPage;
 import library.Library;
 import library.User;
 
-public class ChangePageCommand extends Command {
+public final class ChangePageCommand extends Command {
     private String nextPage;
 
     public String getNextPage() {

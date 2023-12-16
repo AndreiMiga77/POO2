@@ -73,14 +73,14 @@ public final class Playlist implements Playable {
     /**
      * Receive a follower
      */
-    public void addFollower(User user) {
+    public void addFollower(final User user) {
         followers.add(user);
     }
 
     /**
      * Lose a follower
      */
-    public void removeFollower(User user) {
+    public void removeFollower(final User user) {
         followers.remove(user);
     }
 
@@ -153,8 +153,12 @@ public final class Playlist implements Playable {
         listeners--;
     }
 
+    /**
+     * Delete the playlist
+     */
     public void delete() {
-        for (int i = 0; i < followers.size(); i++) {
+        // Iterate backwards because size changes when removing
+        for (int i = followers.size() - 1; i >= 0; i--) {
             followers.get(i).unfollowPlaylist(this);
         }
     }

@@ -1,15 +1,17 @@
 package command;
 
-import command.output.AddAlbumCommandOutput;
 import command.output.CommandOutput;
 import command.output.RemoveAlbumCommandOutput;
-import fileio.input.SongInput;
-import library.*;
+import library.Library;
+import library.User;
+import library.Artist;
+import library.Album;
+import library.Song;
+import library.Playlist;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RemoveAlbumCommand extends Command {
+public final class RemoveAlbumCommand extends Command {
     private String name;
 
     public String getName() {
@@ -28,7 +30,8 @@ public class RemoveAlbumCommand extends Command {
         } else {
             Artist artist = (Artist) user;
             List<Album> albums = artist.getAlbums();
-            Album album = albums.stream().filter(a -> a.getName().equals(name)).findAny().orElse(null);
+            Album album = albums.stream().filter(a -> a.getName().equals(name))
+                    .findAny().orElse(null);
             if (album == null) {
                 message = getUsername() + " doesn't have an album with the given name.";
             } else {

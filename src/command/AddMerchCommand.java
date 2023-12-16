@@ -1,15 +1,15 @@
 package command;
 
-import command.output.AddEventCommandOutput;
 import command.output.AddMerchCommandOutput;
 import command.output.CommandOutput;
-import library.*;
+import library.Library;
+import library.User;
+import library.Artist;
+import library.Merch;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class AddMerchCommand extends Command {
+public final class AddMerchCommand extends Command {
     private String name;
     private String description;
     private Integer price;

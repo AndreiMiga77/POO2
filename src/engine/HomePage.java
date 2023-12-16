@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public final class HomePage extends Page {
     public static final int NUM_MATCHES = 5;
 
-    public HomePage(User owner) {
+    public HomePage(final User owner) {
         super(owner);
     }
 

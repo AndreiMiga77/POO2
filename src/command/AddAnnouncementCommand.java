@@ -9,7 +9,7 @@ import library.Announcement;
 
 import java.util.List;
 
-public class AddAnnouncementCommand extends Command {
+public final class AddAnnouncementCommand extends Command {
     private String name;
     private String description;
 

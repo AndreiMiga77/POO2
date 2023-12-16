@@ -2,7 +2,11 @@ package command;
 
 import command.output.CommandOutput;
 import command.output.ShowAlbumsCommandOutput;
-import library.*;
+import library.Library;
+import library.User;
+import library.Artist;
+import library.Album;
+import library.Song;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

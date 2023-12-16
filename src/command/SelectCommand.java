@@ -35,15 +35,16 @@ public final class SelectCommand extends Command {
             if (getItemNumber() > lastSearch.size()) {
                 message = "The selected ID is too high.";
             } else {
-                message = "Successfully selected " +  lastSearch.get(itemNumber - 1).getName() + ".";
+                message = "Successfully selected " + lastSearch.get(itemNumber - 1).getName() + ".";
                 user.setSelectedSource(itemNumber - 1);
             }
         } else {
             if (getItemNumber() > lastSearchedPages.size()) {
                 message = "The selected ID is too high.";
             } else {
-                message = "Successfully selected " +
-                        lastSearchedPages.get(itemNumber - 1).getOwner().getUsername() + "'s page.";
+                message = "Successfully selected "
+                        + lastSearchedPages.get(itemNumber - 1)
+                        .getOwner().getUsername() + "'s page.";
                 user.setCurrentPage(lastSearchedPages.get(itemNumber - 1));
             }
         }

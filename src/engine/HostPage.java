@@ -1,15 +1,13 @@
 package engine;
 
-import library.Artist;
 import library.Host;
 import library.Podcast;
 import library.PodcastEpisode;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public final class HostPage extends Page {
-    public HostPage(Host user) {
+    public HostPage(final Host user) {
         super(user);
     }
 
@@ -30,7 +28,9 @@ public final class HostPage extends Page {
                 if (j > 0) {
                     value.append(", ");
                 }
-                value.append(curEpisode.getName()).append(" - ").append(curEpisode.getDescription());
+                value.append(curEpisode.getName())
+                        .append(" - ")
+                        .append(curEpisode.getDescription());
             }
             value.append("]\n");
         }
