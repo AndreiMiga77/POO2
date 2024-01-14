@@ -30,11 +30,13 @@ public final class Library {
     private ArrayList<Song> songs;
 
     private ArrayList<Podcast> podcasts;
+    private ArrayList<Album> albums;
 
     private Library(final LibraryInput libInput) {
         users = new ArrayList<>();
         songs = new ArrayList<>();
         podcasts = new ArrayList<>();
+        albums = new ArrayList<>();
         for (UserInput user : libInput.getUsers()) {
             users.add(new User(user));
         }
@@ -62,6 +64,17 @@ public final class Library {
             for (Album a : u.getAlbums()) {
                 allSongs.addAll(a.getSongs());
             }
+        }
+        return allSongs;
+    }
+
+    /**
+     * Get songs in the order they were added
+     */
+    public ArrayList<Song> getOrderedSongs() {
+        ArrayList<Song> allSongs = new ArrayList<>(songs);
+        for (Album a : albums) {
+            allSongs.addAll(a.getSongs());
         }
         return allSongs;
     }
@@ -119,6 +132,20 @@ public final class Library {
         }
         playlists.removeIf(Playlist::isPrivate);
         return playlists;
+    }
+
+    /**
+     * Add an album to the library
+     */
+    public void addAlbum(final Album album) {
+        albums.add(album);
+    }
+
+    /**
+     * Remove an album from the library
+     */
+    public void removeAlbum(final Album album) {
+        albums.remove(album);
     }
 
     /**

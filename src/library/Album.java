@@ -123,12 +123,12 @@ public final class Album implements Playable {
      * Delete the album
      */
     public void delete() {
-        for (int i = 0; i < songs.size(); i++) {
-            Song song = songs.get(i);
-            for (int j = song.getLikes() - 1; j >= 0; j--) {
-                song.getLikers().get(j).unlikeSong(song);
+        for (Song song : songs) {
+            while (!song.getLikers().isEmpty()) {
+                song.getLikers().getFirst().unlikeSong(song);
             }
         }
+        Library.getInstance().removeAlbum(this);
     }
 
     /**

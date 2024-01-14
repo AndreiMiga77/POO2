@@ -14,7 +14,7 @@ public final class SwitchConnectionStatusCommand extends Command {
         if (user == null) {
             message = "The username " + getUsername() + " doesn't exist.";
         } else if (user.getType() != User.UserType.USER) {
-            message = user.getUsername() + " is not a normal user";
+            message = user.getUsername() + " is not a normal user.";
         } else {
             user.setOffline(!user.isOffline());
             message = user.getUsername() + " has changed status successfully.";

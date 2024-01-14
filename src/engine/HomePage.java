@@ -16,7 +16,7 @@ public final class HomePage extends Page {
     @Override
     public String getContents() {
         ArrayList<Song> likedSongs = new ArrayList<>(getOwner().getLikedSongs());
-        likedSongs.sort((s1, s2) -> -Integer.compare(s2.getLikes(), s1.getLikes()));
+        likedSongs.sort((s1, s2) -> Integer.compare(s2.getLikes(), s1.getLikes()));
         ArrayList<Playlist> followedPlaylists = new ArrayList<>(getOwner().getFollowedPlaylists());
         followedPlaylists.sort((p1, p2) -> {
             int numLikes1 = 0, numLikes2 = 0;

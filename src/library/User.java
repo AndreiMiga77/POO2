@@ -295,5 +295,21 @@ public class User {
         for (int i = 0; i < ownedPlaylists.size(); i++) {
             ownedPlaylists.get(i).delete();
         }
+
+        Library library = Library.getInstance();
+        ArrayList<User> users = library.getRegularUsers();
+        for (User u : users) {
+            if (u == this)
+                continue;
+            List<Page> pages = u.getLastSearchedPages();
+            if (pages != null) {
+                for (Page p : pages) {
+                    if (p.getOwner() == this) {
+                        u.setLastSearchedPages(null);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

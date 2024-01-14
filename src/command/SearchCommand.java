@@ -59,6 +59,8 @@ public final class SearchCommand extends Command {
             }
             user.setSelectedSource(-1);
         }
+        user.setLastSearch(null);
+        user.setLastSearchedPages(null);
 
         if (type.equals("song")) {
             ArrayList<Song> songs = library.findSongsByFilter(filters);

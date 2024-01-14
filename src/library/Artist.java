@@ -26,6 +26,7 @@ public final class Artist extends User {
      */
     public void addAlbum(final Album album) {
         albums.add(album);
+        Library.getInstance().addAlbum(album);
     }
 
     /**

@@ -33,6 +33,8 @@ public final class SelectCommand extends Command {
             message = "Please conduct a search before making a selection.";
         } else if (lastSearch != null) {
             if (getItemNumber() > lastSearch.size()) {
+                if (getTimestamp() == 11809)
+                    System.out.println("lol");
                 message = "The selected ID is too high.";
             } else {
                 message = "Successfully selected " + lastSearch.get(itemNumber - 1).getName() + ".";
@@ -40,6 +42,8 @@ public final class SelectCommand extends Command {
             }
         } else {
             if (getItemNumber() > lastSearchedPages.size()) {
+                if (getTimestamp() == 11809)
+                    System.out.println("lol");
                 message = "The selected ID is too high.";
             } else {
                 message = "Successfully selected "

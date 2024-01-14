@@ -12,7 +12,7 @@ public final class GetTop5SongsCommand extends Command {
     @Override
     public CommandOutput execute() {
         Library library = Library.getInstance();
-        ArrayList<Song> songs = new ArrayList<>(library.getSongs());
+        ArrayList<Song> songs = new ArrayList<>(library.getOrderedSongs());
         ArrayList<String> songNames = new ArrayList<>(NUM_MATCHES);
 
         songs.sort((s1, s2) -> {

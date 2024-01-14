@@ -27,38 +27,36 @@ public final class DeleteUserCommand extends Command {
         } else if (user.getHomePage().getVisitors() > 0) {
             message = user.getUsername() + " can't be deleted.";
         } else {
-            ArrayList<User> users = library.getRegularUsers();
-            for (User u : users) {
-                List<Page> pages = u.getLastSearchedPages();
-                if (pages != null) {
-                    for (Page p : pages) {
-                        if (p.getOwner() == user) {
-                            message = user.getUsername() + " can't be deleted.";
-                            break;
-                        }
-                    }
-                }
-                if (message != null) {
-                    break;
-                }
-            }
-            if (message == null) {
-                if (user.getType() == User.UserType.USER) {
-//                    for (User u : library.getUsers()) {
-//                        for (Playlist p : u.getPlaylists()) {
-//                            if (p.getOwner() == user && p.getNumListeners() > 0) {
-//                                if (p.getNumListeners() == 1 &&
-//                                        user.getPlayer().getCurrent() == p) {
-//                                    continue;
-//                                }
-//                                message = user.getUsername() + " can't be deleted.";
-//                                break;
-//                            }
-//                        }
-//                        if (message != null) {
+//            ArrayList<User> users = library.getRegularUsers();
+//            for (User u : users) {
+//                if (u == user)
+//                    continue;
+//                List<Page> pages = u.getLastSearchedPages();
+//                if (pages != null) {
+//                    for (Page p : pages) {
+//                        if (p.getOwner() == user) {
+//                            message = user.getUsername() + " can't be deleted.";
 //                            break;
 //                        }
 //                    }
+//                }
+//                if (message != null) {
+//                    break;
+//                }
+//            }
+            if (message == null) {
+                if (user.getType() == User.UserType.USER) {
+                    for (User u : library.getUsers()) {
+                        if (u == user)
+                            continue;
+                        if (u.getPlayer().isLoaded() && u.getPlayer().getCurrent().allowsFollow()) {
+                            Playlist p = (Playlist) u.getPlayer().getCurrent();
+                            if (p.getOwner() == user) {
+                                message = user.getUsername() + " can't be deleted.";
+                                break;
+                            }
+                        }
+                    }
                     if (message == null) {
                         library.deleteUser(user);
                         message = user.getUsername() + " was successfully deleted.";
@@ -104,7 +102,7 @@ public final class DeleteUserCommand extends Command {
                 } else if (user.getType() == User.UserType.HOST) {
                     Host host = (Host) user;
                     for (Podcast podcast : host.getPodcasts()) {
-                        if (podcast.getNumListeners() != 0) {
+                        if (podcast.getNumListeners() > 0) {
                             message = user.getUsername() + " can't be deleted.";
                             break;
                         }

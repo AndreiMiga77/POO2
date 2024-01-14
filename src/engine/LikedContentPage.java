@@ -5,6 +5,7 @@ import library.Song;
 import library.User;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public final class LikedContentPage extends Page {
     public LikedContentPage(final User owner) {
@@ -21,7 +22,10 @@ public final class LikedContentPage extends Page {
                     .append(" - ")
                     .append(likedSongs.get(0).getArtist());
             for (int i = 1; i < likedSongs.size(); i++) {
-                value.append(", ").append(likedSongs.get(i).getName());
+                value.append(", ")
+                        .append(likedSongs.get(i).getName())
+                        .append(" - ")
+                        .append(likedSongs.get(i).getArtist());
             }
         }
         value.append("]\n\nFollowed playlists:\n\t[");
